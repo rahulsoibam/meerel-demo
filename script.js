@@ -8,6 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!Hls.isSupported()) {
         video.src = source;
         var player = new Plyr(video, defaultOptions);
+        player.on("enterfullscreen", (event) => {
+            screen.orientation.lock("landscape");
+        });
+
+        player.on("exitfullscreen", (event) => {
+            screen.orientation.lock("portrait");
+        });
     } else {
         // For more Hls.js options, see https://github.com/dailymotion/hls.js
         const hls = new Hls();
@@ -49,6 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Initialize new Plyr player with quality options
             var player = new Plyr(video, defaultOptions);
+            player.on("enterfullscreen", (event) => {
+                screen.orientation.lock("landscape");
+            });
+
+            player.on("exitfullscreen", (event) => {
+                screen.orientation.lock("portrait");
+            });
         });
 
         hls.attachMedia(video);
